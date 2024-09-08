@@ -32,6 +32,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
   let feeds = vec![
     "https://www.reutersagency.com/feed/?best-topics=political-general&post_type=best",
     "https://techcrunch.com/feed",
+    "https://hnrss.org/frontpage",
+    "https://feeds.bloomberg.com/markets/news.rss",
+    "https://feeds.bloomberg.com/politics/news.rss"
   ]; 
   
   for f in feeds {

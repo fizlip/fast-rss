@@ -1,7 +1,7 @@
 use std::fs::File;
-use std::io::BufReader;
 use rss::Channel;
 use rss::Item;
+use std::io::{BufRead, BufReader};
 
 async fn read_rss(url: &str) -> Option<Vec<Item>>{
   let content = reqwest::get(url)
@@ -27,18 +27,17 @@ async fn consume_feed(url:&str) -> Result<(), &str>{
   Ok(())
 }
 
+fn get_feeds() -> std::io::Result<Vec<String>> {
+  let file = File::open("feeds.txt")?;
+  let reader = BufReader::new(file);
+  reader.lines().collect()
+} 
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
-  let feeds = vec![
-    "https://www.reutersagency.com/feed/?best-topics=political-general&post_type=best",
-    "https://techcrunch.com/feed",
-    "https://hnrss.org/frontpage",
-    "https://feeds.bloomberg.com/markets/news.rss",
-    "https://feeds.bloomberg.com/politics/news.rss"
-  ]; 
-  
+  let feeds:Vec<String> = get_feeds()?;  
   for f in feeds {
-    consume_feed(f).await;
+    consume_feed(&f).await;
   }
   Ok(())
 }

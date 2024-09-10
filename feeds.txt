@@ -1,0 +1,5 @@
+https://www.reutersagency.com/feed/?best-topics=political-general&post_type=best
+https://techcrunch.com/feed
+https://hnrss.org/frontpage
+https://feeds.bloomberg.com/markets/news.rss
+https://feeds.bloomberg.com/politics/news.rss
